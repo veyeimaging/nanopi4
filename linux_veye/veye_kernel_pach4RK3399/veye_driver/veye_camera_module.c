@@ -598,7 +598,7 @@ int veye_camera_module_s_power(struct v4l2_subdev *sd, int on)
 	if (on) {
 		if (cam_mod->state == VEYE_CAMERA_MODULE_POWER_OFF) {
 			//cam_mod->custom.s_power(cam_mod, 1);
-			//ret = pltfrm_camera_module_s_power(&cam_mod->sd, 1);
+			ret = pltfrm_camera_module_s_power(&cam_mod->sd, 1);
 			ret = 0;
 			if (!IS_ERR_VALUE(ret)) {
 				mdelay(cam_mod->custom.power_up_delays_ms[0]);
@@ -607,9 +607,9 @@ int veye_camera_module_s_power(struct v4l2_subdev *sd, int on)
 		}
 		if (cam_mod->state == VEYE_CAMERA_MODULE_HW_STANDBY) {
 			//²»ÓÃ¿ØÖÆ
-			/*ret = pltfrm_camera_module_set_pin_state(&cam_mod->sd,
+			ret = pltfrm_camera_module_set_pin_state(&cam_mod->sd,
 				PLTFRM_CAMERA_MODULE_PIN_PD,
-				PLTFRM_CAMERA_MODULE_PIN_STATE_INACTIVE);*/
+				PLTFRM_CAMERA_MODULE_PIN_STATE_INACTIVE);
 				
 				ret = 0;
 			if (!IS_ERR_VALUE(ret)) {
@@ -634,16 +634,16 @@ int veye_camera_module_s_power(struct v4l2_subdev *sd, int on)
 		}
 	} else {
 		if (cam_mod->state == VEYE_CAMERA_MODULE_STREAMING) {
-			//ret = veye_camera_module_s_stream(sd, 0);
+			ret = veye_camera_module_s_stream(sd, 0);
 			ret = 0;
 			if (!IS_ERR_VALUE(ret))
 				cam_mod->state = VEYE_CAMERA_MODULE_SW_STANDBY;
 		}
 		if (cam_mod->state == VEYE_CAMERA_MODULE_SW_STANDBY) {
-			/*ret = pltfrm_camera_module_set_pin_state(
+			ret = pltfrm_camera_module_set_pin_state(
 				&cam_mod->sd,
 				PLTFRM_CAMERA_MODULE_PIN_PD,
-				PLTFRM_CAMERA_MODULE_PIN_STATE_ACTIVE);*/
+				PLTFRM_CAMERA_MODULE_PIN_STATE_ACTIVE);
 			ret = 0;
 
 			if (!IS_ERR_VALUE(ret))
@@ -651,7 +651,7 @@ int veye_camera_module_s_power(struct v4l2_subdev *sd, int on)
 		}
 		if (cam_mod->state == VEYE_CAMERA_MODULE_HW_STANDBY) {
 			//cam_mod->custom.s_power(cam_mod, 0);
-			//ret = pltfrm_camera_module_s_power(&cam_mod->sd, 0);
+			ret = pltfrm_camera_module_s_power(&cam_mod->sd, 0);
 			ret = 0;
 			if (!IS_ERR_VALUE(ret)) {
 				cam_mod->state = VEYE_CAMERA_MODULE_POWER_OFF;
