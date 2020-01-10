@@ -1,3 +1,4 @@
+# THIS ONE IS OLD AND DISCARDED,PLEASE USE :rk3399_veye_dimaging_bsp
 # nanopi4
 VEYE camera module software on NanoPi M4（RK3399）
 
